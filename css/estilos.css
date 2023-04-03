@@ -1,0 +1,37 @@
+header {
+    background-color: #ebf3a0;
+    text-align: center;
+}
+
+main {
+
+    text-align: center;
+    background-color: #f5fac1;
+}
+
+footer {
+    background-color: #a2f6b5;
+    text-align: center;
+}
+
+.boton {
+    background-color: #a2f6b5;
+    border-radius: 10px;
+        color: #000000;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+}
+
+.formularioCarga{
+    border: 2px;
+}
+
+fieldset{
+    border-color: #000000;
+    
+}
