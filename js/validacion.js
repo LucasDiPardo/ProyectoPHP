@@ -2,10 +2,10 @@
 function validar(){
 
     let nombre=document.getElementById("inputNombre").value;
-    let descripcion=document.getElementById("inputDescripcion").value;
+    let descripcion=document.getElementById("inputDescripcion").value.length;
     let imagen=document.getElementById("inputImagen").value;
     let plataforma=document.getElementById("inputPlataforma").value;
-    let url=document.getElementById("inputUrl").value;
+    let url=document.getElementById("inputUrl").value.length;
     let genero=document.getElementById("inputGenero").value;
         
         if (nombre=='') {
@@ -15,8 +15,7 @@ function validar(){
         }
         
         //valido max 250 caracteres, puede estar vacio
-        console.log(descripcion.length);
-        if (descripcion.length()>2){            
+        if (descripcion>250){            
             document.getElementById('obligatorioDescripcion').style.display='inline';              
         }else{            
             document.getElementById('obligatorioDescripcion').style.display='none';
@@ -41,7 +40,7 @@ function validar(){
         }
         
         //valido max 80 caracteres, puede estar vacio
-        if (url.length()>80){
+        if (url>80){
             document.getElementById('obligatorioURL').style.display='inline';         
         }else{
             document.getElementById('obligatorioURL').style.display='none';  
