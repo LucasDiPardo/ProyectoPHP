@@ -7,16 +7,6 @@ function validar(){
     let plataforma=document.getElementById("inputPlataforma").value;
     let url=document.getElementById("inputUrl").value;
     let genero=document.getElementById("inputGenero").value;
-    
-   
-
-    let completo= nombre!=null 
-        && descripcion<=255
-        &&imagen!=null
-        &&plataforma!=null
-        &&url<=80
-        &&genero!=null;
-
         
         if (nombre=='') {
             document.getElementById('obligatorioNombre').style.display='inline';
@@ -24,7 +14,9 @@ function validar(){
             document.getElementById('obligatorioNombre').style.display='none';
         }
         
-        if (descripcion==''){            
+        //valido max 250 caracteres, puede estar vacio
+        console.log(descripcion.length);
+        if (descripcion.length()>2){            
             document.getElementById('obligatorioDescripcion').style.display='inline';              
         }else{            
             document.getElementById('obligatorioDescripcion').style.display='none';
@@ -48,7 +40,8 @@ function validar(){
             document.getElementById('obligatorioGenero').style.display='none';
         }
         
-        if (url==''){
+        //valido max 80 caracteres, puede estar vacio
+        if (url.length()>80){
             document.getElementById('obligatorioURL').style.display='inline';         
         }else{
             document.getElementById('obligatorioURL').style.display='none';  
@@ -76,7 +69,19 @@ function resetCampos(){
     document.getElementById('obligatorioImg').style.display='none';
     document.getElementById('obligatorioPlataforma').style.display='none';
 
-    location.reload( forceGet );    
+    //location.reload( forceGet );    
 
 
+}
+
+function validarFiltro(){
+
+    let genero=document.getElementById('filtroGenero');
+
+    if (genero==''){
+        document.getElementById('filtroGenero').style.borderColor="red";
+    }
+
+    console.log("Ingresa Funcion");
+    event.preventDefault();
 }

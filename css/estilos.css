@@ -25,6 +25,9 @@ footer {
         margin: 4px 2px;
         cursor: pointer;
 }
+.boton:hover{
+    background-color:#90dda2 ;
+}
 p{
     font-size: larger;
 }
