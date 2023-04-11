@@ -40,21 +40,25 @@
                     <div class="m-2">
                         <!--Obligatorio-->                 
                         <input id="inputNombre" name="inputNombre d-inline" type="text" placeholder="NOMBRE">
-                        <p class="obligatorio">*</p>
+                        <p id="obligatorioNombre" class="obligatorio">*</p>
                     </div>                    
                     <div class="m-2">
                         <!--Obligatorio-->
                         <input id="inputImagen" name="inputImagen" type="file">
+                        <p id="obligatorioImg" class="obligatorio">*</p>
                     </div>
                     <div class="m-2">
                         <!--Max 255 caracteres-->
                         <input id="inputDescripcion" name="inputDescripcion d-inline" placeholder="DESCRIPCION" type="textarea" rows="4" cols="50" >
-
+                        <p id="obligatorioDescripcion" class="obligatorio">*</p>
                     </div>
                     <div class="m-2">
                         <!--Opcion-->
-                        <p class="parrafoFormulario">PLATAFORMA
+                        <p class="parrafoFormulario d-inline">PLATAFORMA</p>
                             <select name="inputPlataforma" id="inputPlataforma">
+                                <option value="">
+                                    -
+                                </option>
                                 <option value="STEAM">
                                     STEAM
                                 </option>
@@ -63,15 +67,18 @@
                                     G2A
                                 </option>
                             </select>
-                        </p>
+                            <p id="obligatorioPlataforma" class="obligatorio">*</p>
                     </div>
                     <div class="m-2">
                         <input id="inputUrl" name="inputUrl d-inline" type="url" placeholder="URL JUEGO">
-
+                        <p id="obligatorioURL" class="obligatorio">*</p>
                     </div>
                     <div class="m-2">
-                        <p class="parrafoFormulario">GENERO
-                            <select id="inputGenero" name="inputGenero">
+                        <p class="parrafoFormulario d-inline">GENERO</p>
+                            <select  id="inputGenero" name="inputGenero">
+                                <option value="">
+                                    -
+                                </option>
                                 <option value="accion">
                                     ACCION
                                 </option>
@@ -92,7 +99,7 @@
                                     DISPAROS
                                 </option>
                             </select>
-                        </p>
+                        <p id="obligatorioGenero" class="obligatorio">*</p>
                     </div>
 
                     <div>
@@ -100,7 +107,7 @@
                     </div>
                     <div>
                         <input class="boton" onclick="validar()" type="submit" value="ENVIAR">
-                        <input class="boton" type="reset" value="BORRAR">
+                        <input class="boton" type="reset" onclick="resetCampos()" value="BORRAR">
                     </div>
             </div>
         </form>
