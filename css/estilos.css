@@ -1,6 +1,5 @@
 header {
     background-color: #ebf3a0;
-    text-align: center;
 }
 
 main {
@@ -26,6 +25,9 @@ footer {
         margin: 4px 2px;
         cursor: pointer;
 }
+p{
+    font-size: larger;
+}
 
 .formularioCarga{
     border: 2px;
@@ -34,4 +36,19 @@ footer {
 fieldset{
     border-color: #000000;
     
+}
+
+.logo{
+    max-width: 100px;
+    max-height: 200px;    
+}
+
+#mensajeError{
+    display: none;
+    color: red;
+}
+
+.obligatorio{
+    color: red;
+    display: none;
 }
