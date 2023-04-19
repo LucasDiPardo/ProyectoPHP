@@ -11,14 +11,14 @@
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <!--CSS-->
-    <link rel="stylesheet" href="/css/estilos.css">
+    <link rel="stylesheet" href="../css/estilos.css">
 </head>
 
 <body>
     <header class="d-flex justify-content-between p-1 align-items-center">
 
         <div>
-            <img class="logo" src="/img/logo.png" alt="logoPagina" height="100px" width="100px">     
+            <img class="logo" src="../img/logo.png" alt="logoPagina" height="100px" width="100px">     
         </div>
 
         <div>
@@ -28,7 +28,7 @@
         </div>
         
         <div>
-            <button class="boton" onclick="location.href='../index.html'">
+            <button class="boton" onclick="location.href='../index.php'">
                 HOME
             </button>
         </div>
@@ -123,7 +123,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
         crossorigin="anonymous"></script>
-    <script src="/js/validacion.js"></script>
+    <script src="../js/validacion.js"></script>
 
 </body>
 
