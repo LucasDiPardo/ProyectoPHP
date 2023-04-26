@@ -1,0 +1,36 @@
+<div class="container mt-3">
+            <div class="row">
+                
+                    <?php
+                        
+
+                        $resultSet = mysqli_query($conn, $consulta); //selecciono todo de la tabla juegos
+
+                        while ($row= mysqli_fetch_row($resultSet)){
+                            ?>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="card m-2">
+                                    <img src="images/<?php echo $row[3]; ?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $row[0]; ?></h5>
+                                        <p class="card-text">
+                                            <?php echo $row[1]; ?>
+                                        </p>
+                                        <p class="card-text">
+                                            Genero : <?php echo $row[3]; ?>
+                                        </p>
+                                        <p class="card-text">
+                                            Plataforma : <?php echo $row[4]; ?>
+                                        </p>
+                                        <a href="<?php echo $row[2]; ?>" class="btn btn-primary">
+                                            Link
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+
+                    ?>
+                </div>
+        </div>

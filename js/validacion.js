@@ -104,3 +104,8 @@ function validarFiltro(){
     }
     event.preventDefault();
 }
+
+function limpiarFiltros(){
+    // Llamamos a la URL del archivo PHP que procesa la consulta
+    window.location.href = "index.php?mostrar_todos=true";
+}
