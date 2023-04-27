@@ -158,9 +158,7 @@
                                 $consulta .= " ORDER BY nombre ASC";
                         }
                         }
-                    }
-                    
-                    
+                    }               
                     //var_dump($consulta);die;
 
                     $resultado = mysqli_query($connn,$consulta);            
