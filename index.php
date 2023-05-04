@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,15 +12,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--CSS-->
-    <link rel="stylesheet" href="css/estilos.css">
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+    <!--CSS-->
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
     
-    <header class="d-flex justify-content-between p-1 align-items-center">
+    <header class="d-flex justify-content-between p-3 align-items-center">
 
         <div>
             <img class="logo" src="img/logo.png" alt="logoPagina">     
@@ -33,7 +37,7 @@
         </div>
     </header>
 
-    <main>
+    <main class="d-flex justify-content-center p-2">
         <?php 
         include_once('conexionBD.php'); 
         ?>
@@ -42,7 +46,7 @@
             <form id="form1" name="form1" method="POST" action="index.php">
 
                 <div class="row">
-                    <h4 class="card-title">Nombre a Buscar</h4>
+                    <h4 class="text-light">Nombre a Buscar</h4>
                     <input type="text" class="form-control m-2" name='buscar' id='buscar' >
                 </div>
 
@@ -51,13 +55,13 @@
                     <table class="table">
                             <tr>
                                 <td class="col-4">
-                                    <h6>Genero</h6>
+                                    <h6 class="text-light">Genero</h6>
                                 </td>
                                 <td class="col-4">
-                                    <h6>Plataforma</h6>
+                                    <h6 class="text-light" >Plataforma</h6>
                                 </td>
                                 <td class="col-4">
-                                    <h6>Orden</h6>
+                                    <h6 class="text-light" >Orden</h6>
                                 </td>
                             </tr>
 
@@ -67,9 +71,9 @@
                                         <option value=''>-</option>
                                         <option value='1'>Acción</option>
                                         <option value='2'>Deporte</option>
-                                        <option value='3'>Estrategia</option>
-                                        <option value='4'>Aventura</option>
                                         <option value='3'>Terror</option>
+                                        <option value='4'>Estrategia</option>
+                                        <option value='5'>Aventura</option>
                                     </select>
                                 </td>
                                 <td>
@@ -102,73 +106,60 @@
                 
             </form>
                 <?php                    
-                    if (isset($_GET['mostrar_todos']) && $_GET['mostrar_todos'] == 'true') {
-                        // Si se solicita mostrar todos los resultados, se omite la parte de la consulta que filtra los resultados
-                        $consulta = "SELECT * FROM juegos";
-                    } else {
-                        // Si no se solicita mostrar todos los resultados, se construye la consulta con los filtros seleccionados por el usuario
                         if (empty($_POST['buscar']) && (empty($_POST['buscarGenero'])) && (empty($_POST['buscarPlataforma']))){
                             $consulta = "SELECT * FROM juegos";
                         }
                         else{
                             $consulta = "SELECT * FROM juegos";
-    
-                            //var_dump($_POST);die;
-    
-                            if (isset($_POST['buscar']) && (!empty($_POST['buscar']))){ //si el buscar no es vacio hace esto
+
+                            if (!empty($_POST['buscar'])){ //si el buscar no es vacio hace esto
                                 $consulta .= ' WHERE nombre like "%' . $_POST['buscar'] . '%"';
-                                //var_dump($consulta);
-    
-                                if (isset($_POST['buscarGenero'])&&(!empty($_POST['buscarGenero']))) {                            
+
+                                if (!empty($_POST['buscarGenero'])) {                            
                                     $buscarGenero = $_POST['buscarGenero'];
                                     $consulta .= ' AND id_genero = '. $buscarGenero;
-                                    //var_dump($consulta);
                                 }
     
-                                if (isset($_POST['buscarPlataforma'])&&(!empty($_POST['buscarPlataforma']))) {
+                                if (!empty($_POST['buscarPlataforma'])) {
                                     $buscarPlataforma = $_POST['buscarPlataforma'];
                                     $consulta .= ' AND id_plataforma = '. $buscarPlataforma;
                                 }
     
                             }else{ //si el buscar es vacio hace esto
-                                if (isset($_POST['buscarGenero'])&&(!empty($_POST['buscarGenero']))){ //si el genero no es vacio
+                                if (!empty($_POST['buscarGenero'])){ //si el genero no es vacio
                                     $buscarGenero = $_POST['buscarGenero'];
                                     $consulta .= ' WHERE id_genero = '. $buscarGenero;
-                                    //var_dump($consulta);
     
-                                    if (isset($_POST['buscarPlataforma'])&&(!empty($_POST['buscarPlataforma']))) {
+                                    if (!empty($_POST['buscarPlataforma'])) {
                                         $buscarPlataforma = $_POST['buscarPlataforma'];
                                         $consulta .= ' AND id_plataforma = '. $buscarPlataforma;
                                     }
-    
+
                                 }else{ //si el genero es vacio hace esto
-                                    if (isset($_POST['buscarPlataforma'])&&(!empty($_POST['buscarPlataforma']))) {
+                                    if (!empty($_POST['buscarPlataforma'])) {
                                         $buscarPlataforma = $_POST['buscarPlataforma'];
                                         $consulta .= ' WHERE id_plataforma = '. $buscarPlataforma;
-                                        //var_dump($consulta);
                                     }  
                                 }
-    
                             }
                         }
                         //va afuera                                               
-                        if (isset($_POST['orden'])&&(!empty($_POST['orden']))){
+                        if (!empty($_POST['orden'])){
                             $orden= $_POST['orden'];
                             if ($orden == '1'){
                                 $consulta .= " ORDER BY nombre ASC";
                         }
                         }
-                    }               
-                    //var_dump($consulta);die;
 
-                    $resultado = mysqli_query($connn,$consulta);            
-                    $numeroSql = mysqli_num_rows($resultado);                    
+                    $resultado = mysqli_query($conn,$consulta);            
+                    $numeroSql = mysqli_num_rows($resultado);                 
                 ?>
 
-                <p> <i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados Encontrados</p>
+                <p class="text-light"> <i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados Encontrados</p>
                 
-                <div class="table-responsive">
-                    <div class="row">                
+                <div style="overflow-x:hidden;" class="table-responsive">
+                    <div class="row"> 
+                                      
                         <?php                   
                         if ($resultado){
                         while ($row = $resultado->fetch_array()){ 
@@ -176,34 +167,65 @@
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="card m-1">                                
                                     <!--Imagen -->    
-                                    <img src="images/<?php echo $row[2]; ?>" class="card-img-top" alt="...">
+                                    <?php
+                                        $base64 = 'data:image/'.$row['tipo_imagen'].';base64,'.($row['imagen']);                                                                             
+                                        echo '<img class="card-img-top" src="'.$base64.'"/>';
+                                    ?>
                                     
                                     <div class="card-body">
-                                        <!-- ID : <h1 class="card-title"><?php echo $row[0]; ?></h1> -->
-                                        
                                         <!--Nombre-->
                                             <h2 class="card-text">
-                                                <?php echo $row[1]; ?>
+                                                <?php echo $row['nombre']; ?>
                                             </h2>
                                         
                                         <!--Genero -->
                                             <p class="card-text">
-                                                <?php echo $row[6]; ?>
+                                            <?php
+                                                switch ($row['id_genero']) {
+                                                    case 1:
+                                                        echo 'Acción';
+                                                        break;
+                                                    case 2:
+                                                        echo 'Deporte';
+                                                        break;
+                                                    case 3:
+                                                        echo 'Terror';
+                                                        break;
+                                                    case 4:
+                                                        echo 'Estrategia';
+                                                        break;
+                                                    case 5:
+                                                        echo 'Aventura';
+                                                        break;
+                                                }
+                                            ?>
                                             </p>
 
                                         <hr>
                                         <!--Descripcion-->
                                             <p class="card-text">
-                                                <?php echo $row[4]; ?>
+                                                <?php echo $row['descripcion']; ?>
                                             </p>
                                         <hr>
                                             <!--Plataforma-->
                                             <p class="card-text">
-                                                Plataforma : <?php echo $row[7]; ?>
+                                            <?php
+                                                switch ($row['id_plataforma']) {
+                                                    case 1:
+                                                        echo 'PC';
+                                                        break;
+                                                    case 2:
+                                                        echo 'PlayStation';
+                                                        break;
+                                                    case 3:
+                                                        echo 'Xbox';
+                                                        break;
+                                                }
+                                            ?>
                                             </p>
                                             
                                             <!--Link-->
-                                            <a href="<?php echo $row[5]; ?>" class="btn btn-primary" target="_blank">
+                                            <a href="<?php echo $row['url']; ?>" class="btn btn-primary" target="_blank">
                                                 Link
                                             </a>
                                     </div>
@@ -212,20 +234,42 @@
                         <?php }} ?>
                     </div>
                 </div>
-        </div>                
+        </div>
+    
+        <?php if(!empty($_SESSION['nombre'])): ?>
+            <script>
+                document.body.classList.add("modalAbierto");
+            </script>
+            <div id="miModal" class="modalPersonalizado">
+                <div class="contenidoModal">
+                    <div class="modalHeader">
+                        <span id="cerrar">&times;</span>
+                        <h2>Juego agregado</h2>
+                    </div>
+                    <div class="modalBody">
+                        <p>Se ha agregado <?php echo $_SESSION['nombre'] ?> a la lista de juegos </p>
+                    </div>
+                    <?php session_destroy() ?>
+                    <div class="modalFooter">
+                        <button id="botonCerrar" class="boton">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        
     </main>
                 
-    <footer>
+    <footer >
         <p>Lucas Corbalan - Lucas Di Pardo</p>
         <p>2023</p>
     </footer>
-
 
     <!--Js Bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
         crossorigin="anonymous"></script>
-    <script src="js/validacion.js"></script>
+
+    <script src="js/validacionIndex.js"></script>
 </body>
 
 </html>
