@@ -38,3 +38,9 @@ function validarFiltro(){
         ordenar.style.borderColor="#dee2e6";
     }
 }
+
+function limpiarFiltros(){
+    include_once('conexionBD.php'); 
+    $consulta = "SELECT * FROM juegos";
+    $resultado = mysqli_query($conn,$consulta); 
+}

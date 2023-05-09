@@ -40,15 +40,18 @@
     <main class="d-flex justify-content-center p-2">
         <?php 
         include_once('conexionBD.php'); 
+        include_once('cargaDatosDinamicos.php');
         ?>
 
         <div class="container">
             <form id="form1" name="form1" method="POST" action="index.php">
 
+
                 <div class="row">
                     <h4 class="text-light">Nombre a Buscar</h4>
                     <input type="text" class="form-control m-2" name='buscar' id='buscar' >
                 </div>
+
 
                 <div class="row">
                     
@@ -68,21 +71,26 @@
                             <tr>
                                 <td>
                                     <select id='buscarGenero' name='buscarGenero' class="form-select mt-2">
-                                        <option value=''>-</option>
-                                        <option value='1'>Acción</option>
-                                        <option value='2'>Deporte</option>
-                                        <option value='3'>Terror</option>
-                                        <option value='4'>Estrategia</option>
-                                        <option value='5'>Aventura</option>
+                                        <option value="">-</option>
+                                        <?php
+                                            if (mysqli_num_rows($resultadoGenero) > 0) {
+                                                while ($row = mysqli_fetch_assoc($resultadoGenero)) {
+                                                    echo "<option value='" . $row["id"] . "'>" . $row["nombre"] . "</option>";
+                                                }                
+                                            }
+                                        ?>
                                     </select>
                                 </td>
                                 <td>
                                         <select id='buscarPlataforma' name='buscarPlataforma' class="form-select mt-2">
-                                            <option value=''>-</option>
-                                            <option value='1'>PC</option>
-                                            <option value='2'>PlayStation</option>
-                                            <option value='3'>Xbox</option>
-
+                                            <option value="">-</option>
+                                            <?php
+                                            if (mysqli_num_rows($resultadoPlataforma) > 0) {
+                                                while ($row = mysqli_fetch_assoc($resultadoPlataforma)) {
+                                                    echo "<option value='" . $row["id"] . "'>" . $row["nombre"] . "</option>";
+                                                } 
+                                            }
+                                            ?>
                                         </select>
                                     </td>
 
@@ -100,7 +108,7 @@
                 <div class="row">
                     <div class="col-12">
                         <input type="submit" class="boton inline" value="Aplicar Filtros" >
-                        <button class="boton" onclick="limpiarFiltros()">Eliminar Filtros</button>
+                        <a href="" onclick="limpiarFiltros()" class="boton">Reset Filtros</a>
                     </div>
                 </div>
                 

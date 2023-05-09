@@ -31,6 +31,10 @@
         </div>
     </header>
     <main>
+        <?php 
+            include_once('../conexionBD.php'); 
+            include_once('../cargaDatosDinamicos.php');
+        ?>
         <div id="contenedorForm">
             <form id="formularioCarga" action="../cargarTabla.php" method="POST" enctype="multipart/form-data">
                 <div class="p-3">
@@ -54,18 +58,14 @@
                             <!--Opcion-->
                             <p class="parrafoFormulario d-inline">PLATAFORMA</p>
                                 <select name="inputPlataforma" id="inputPlataforma">
-                                    <option value="">
-                                        -
-                                    </option>
-                                    <option value=1>
-                                        PC
-                                    </option>
-                                    <option value=2>
-                                        PlayStation
-                                    </option>
-                                    <option value=3>
-                                        Xbox
-                                    </option>
+                                    <option value="">-</option>
+                                    <?php
+                                    if (mysqli_num_rows($resultadoPlataforma) > 0) {
+                                        while ($row = mysqli_fetch_assoc($resultadoPlataforma)) {
+                                            echo "<option value='" . $row["id"] . "'>" . $row["nombre"] . "</option>";
+                                        } 
+                                        }
+                                    ?>
                                 </select>
                                 <p id="obligatorioPlataforma" class="obligatorio">*</p>
                         </div>
@@ -76,28 +76,14 @@
                         <div class="m-4">
                             <p class="parrafoFormulario d-inline">GENERO</p>
                                 <select  id="inputGenero" name="inputGenero">
-                                    <option value="">
-                                        -
-                                    </option>
-                                    <option value=1>
-                                        Accion
-                                    </option>
-        
-                                    <option value=2>
-                                        Deporte
-                                    </option>
-        
-                                    <option value=3>
-                                        Terror
-                                    </option>
-        
-                                    <option value=4>
-                                        Estrategia
-                                    </option>
-        
-                                    <option value=5>
-                                        Aventura
-                                    </option>
+                                    <option value="">-</option>
+                                    <?php
+                                        if (mysqli_num_rows($resultadoGenero) > 0) {
+                                            while ($row = mysqli_fetch_assoc($resultadoGenero)) {
+                                                echo "<option value='" . $row["id"] . "'>" . $row["nombre"] . "</option>";
+                                            }                
+                                        }
+                                    ?>
                                 </select>
                             <p id="obligatorioGenero" class="obligatorio">*</p>
                         </div>

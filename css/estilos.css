@@ -35,7 +35,13 @@ footer {
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
+        
 }
+
+.boton:hover{
+    background-color: #19d5ff;
+}
+
 p{
     font-size: larger;
 }
